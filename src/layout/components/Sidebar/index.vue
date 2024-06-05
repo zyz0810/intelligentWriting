@@ -3,9 +3,16 @@
     <div>
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
-      <div class="nav_create">
-        <el-button type="primary" icon="el-icon-plus">新建</el-button>
-      </div>
+<!--      <div class="nav_create">-->
+        <el-dropdown class="nav_create" placement="bottom">
+          <el-button type="primary" icon="el-icon-plus">新建</el-button>
+          <el-dropdown-menu slot="dropdown" class="nav_create_dropdown">
+            <el-dropdown-item><i class="el-icon-document m_r30 f20"></i>新建文档</el-dropdown-item>
+            <el-dropdown-item><i class="el-icon-document m_r30 f20"></i>AI模板</el-dropdown-item>
+            <el-dropdown-item><i class="el-icon-document m_r30 f20"></i>上传文档</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+<!--      </div>-->
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
@@ -62,3 +69,8 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+  .nav_create_dropdown{
+    width: 210px;
+  }
+</style>

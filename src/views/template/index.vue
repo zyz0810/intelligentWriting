@@ -20,88 +20,31 @@
         </div>
       </div>
     </div>
-    <el-tabs class="refund_tab"
-             v-model="listQuery.statusWebType"
-             @tab-click="search">
-      <el-tab-pane label="全部"
-                   name='0'></el-tab-pane>
-      <el-tab-pane label="待审核"
-                   name="1"></el-tab-pane>
-      <el-tab-pane label="待换货"
-                   name="2"></el-tab-pane>
-      <el-tab-pane label="已完成"
-                   name="3"></el-tab-pane>
-      <el-tab-pane label="已关闭"
-                   name="4"></el-tab-pane>
-    </el-tabs>
-    <el-table border v-loading="listLoading"
-              :data="dataList"
-              :header-cell-style="{ background: '#f5f7fa' }"
-              element-loading-text="拼命加载中"
-              @selection-change="(list) => (selectList = list)"
-              @row-click="handleRowClick"
-              :max-height="tableHeight"
-              ref="activityTable"
-              highlight-current-row>
-      <el-table-column type="selection"
-                       min-width="42"
-                       align="center"></el-table-column>
-      <el-table-column label="效期退换编号"
-                       :width="global.tableValueWidth.tableMoreNumberWidth" show-overflow-tooltip
-                       align="center"
-                       prop="sn"
-                       fixed="left"></el-table-column>
-      <el-table-column label="供应商名称"
-                       :width="global.tableValueWidth.tableSupplierNameWidth" show-overflow-tooltip
-                       align="center"
-                       prop="supplierName"></el-table-column>
-      <el-table-column label="客户编码"
-                       :width="global.tableValueWidth.tableMoreNumberWidth" show-overflow-tooltip
-                       align="center"
-                       prop="storeSn"></el-table-column>
-      <el-table-column label="客户名称"
-                       :width="global.tableValueWidth.tableSupplierNameWidth" show-overflow-tooltip
-                       align="center"
-                       prop="storeName"></el-table-column>
-      <el-table-column label="退货金额"
-                       align="center"
-                       prop="price" :width="global.tableValueWidth.tablePriceWidth" show-overflow-tooltip></el-table-column>
-      <el-table-column label="商品种类"
-                       align="center"
-                       prop="skuTypes" :width="global.tableValueWidth.tablePriceWidth" show-overflow-tooltip></el-table-column>
-      <el-table-column label="商品数量"
-                       align="center"
-                       prop="productAmount" :width="global.tableValueWidth.tablePriceWidth" show-overflow-tooltip></el-table-column>
-      <el-table-column label="物流公司"
-                       align="center"
-                       prop="logisticsCompany" :width="global.tableValueWidth.tableShortNameWidth" show-overflow-tooltip></el-table-column>
-      <el-table-column label="物流单号"
-                       align="center"
-                       prop="logisticsOrderNo" :width="global.tableValueWidth.tableShortNameWidth" show-overflow-tooltip></el-table-column>
-      <el-table-column label="状态"
-                       :width="global.tableValueWidth.tableExamStatusWidth" show-overflow-tooltip
-                       :formatter="formatDisplayStatus"
-                       align="center"
-                       prop="status"></el-table-column>
-      <el-table-column label="换货金额"
-                       align="center" :width="global.tableValueWidth.tablePriceWidth" show-overflow-tooltip
-                       prop="exchangePrice"></el-table-column>
-      <el-table-column label="申请时间"
-                       align="center"
-                       :width="global.tableValueWidth.tableTimeWidth" show-overflow-tooltip
-                       prop="createTime"
-                       :formatter="formatTime"></el-table-column>
-      <el-table-column label="客服审核时间"
-                       align="center"
-                       :width="global.tableValueWidth.tableTimeWidth" show-overflow-tooltip
-                       prop="stuffCheckTime"
-                       :formatter="formatTime"></el-table-column>
-      <el-table-column label="入库审核时间"
-                       align="center"
-                       :width="global.tableValueWidth.tableTimeWidth" show-overflow-tooltip
-                       prop="inStockCheckTime"
-                       :formatter="formatTime"></el-table-column>
-    </el-table>
+    <div class="template_box">
+      <div class="template_tit">
+        <span class="f16">从AI模板创建</span>
+        <ul class="template_tab">
+          <li @click="templateTabIndex = item.id" :class="[templateTabIndex == item.id ? 'active':'']" v-for="(item,index) in templateTab" :key="'template_tab'+item">
+            {{item.name}}</li>
+        </ul>
+        <el-input class="template_search"
+          placeholder="搜索AI模板"
+          prefix-icon="el-icon-search"
+          v-model="templateSearch">
+        </el-input>
+      </div>
+      <div class="template_cont">
+        <div class="template_item" v-for="(item,index) in templateList" :key="'templateList'+index">
+          <div class="template_item_first">
+            <div class="template_item_first_left"><img src="./../../assets/image/yellow.png" /></div>
+            <div class="template_item_first_middle">智能写作</div>
+            <div class="template_item_first_right"><i class="el-icon-star-on f20"></i></div>
+          </div>
+          <div class="template_item_second">当你不知道用什么，试试这个</div>
+          <div class="template_item_third"><span class="bg_primary">使用</span></div>
+        </div>
+      </div>
+    </div>
     <pagination :total="total"
                 :page.sync="listQuery.page"
                 :limit.sync="listQuery.limit"
@@ -121,6 +64,28 @@ export default {
   name: "orderList",
   data () {
     return {
+      templateTab:[{
+        id:0,
+        name:'我的收藏'
+      },{
+        id:1,
+        name:'AI模板'
+      },{
+        id:2,
+        name:'媒体写作'
+      },{
+        id:3,
+        name:'短视频'
+      },{
+        id:4,
+        name:'学校教育'
+      },{
+        id:5,
+        name:'电商'
+      }],
+      templateTabIndex:0,
+      templateList:[{id:0},{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7},{id:8},{id:9},{id:10},{id:11},{id:12},{id:13},{id:14},{id:15}],
+      templateSearch:'',
       dataList: [],
       total: 0,
       listLoading: false,
@@ -370,6 +335,7 @@ export default {
     line-height: 30px;
   }
   .create_item{
+    cursor: pointer;
     display: flex;
     align-items: center;
     padding: 12px;
@@ -390,6 +356,90 @@ export default {
       color:#707E98;
       font-size: 12px;
       margin-top: 5px;
+    }
+  }
+}
+.template_box{
+  margin: 20px 0;
+  .template_tit{
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+    margin: 10px 0 5px;
+  }
+  .template_search{
+    width: 226px;
+  }
+  .template_tab{
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    li{
+      cursor: pointer;
+      display: inline-block;
+      padding: 0 6px;
+      margin-right: 5px;
+      line-height: 24px;
+      border-radius: 4px;
+      &.active{
+        background: #fff;
+      }
+    }
+  }
+  .template_cont{
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .template_item{
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px 10px 5px 0;
+    border-radius: 4px;
+    width: calc(25% - 8.4px);
+    background: #fff;
+    &:nth-child(4n){
+      margin: 5px 0 5px 0;
+    }
+    .template_item_first{
+      display: flex;
+      align-items: center;
+      .template_item_first_left{
+        width: 14px;
+        margin-right: 5px;
+        img{
+          width: 14px;
+          height: 14px;
+        }
+      }
+      .template_item_first_middle{
+        font-size: 14px;
+        flex: 1;
+      }
+      .template_item_first_right{
+        width: 30px;
+        text-align: right;
+        color: #E7E7E7;
+      }
+    }
+    .template_item_second{
+      font-size: 12px;
+      color: #707E98;
+      margin-top: 10px;
+      height: 3em;
+    }
+    .template_item_third{
+      text-align: right;
+      span{
+        display: inline-block;
+        padding: 0 13px;
+        color: #fff;
+        font-size: 12px;
+        line-height: 24px;
+        border-radius: 30px;
+        /*background: #2CB1B1;*/
+      }
     }
   }
 }
