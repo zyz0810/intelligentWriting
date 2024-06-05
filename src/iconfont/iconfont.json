@@ -1,0 +1,37 @@
+{
+  "id": "2480354",
+  "name": "admin",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "运营中心图标",
+  "glyphs": [
+    {
+      "icon_id": "26068115",
+      "name": "已过期",
+      "font_class": "yiguoqi",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "17868971",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "7674865",
+      "name": "模块",
+      "font_class": "cedaohang-mokuai",
+      "unicode": "e711",
+      "unicode_decimal": 59153
+    },
+    {
+      "icon_id": "15643744",
+      "name": "线索管理",
+      "font_class": "xiansuoguanli",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    }
+  ]
+}
