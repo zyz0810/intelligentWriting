@@ -7,7 +7,7 @@
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
 <!--        <img v-if="logo" :src="logo" class="sidebar-logo">-->
-        <h1 class="sidebar-title"><span class="f18">康药多 | </span>{{ title }}</h1>
+        <h1 class="sidebar-title"><span class="f18">AI | </span>{{ title }}</h1>
       </router-link>
     </transition>
   </div>
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      title: '运营中心后台',
+      title: '智能写作',
       logo: logo
     }
   }

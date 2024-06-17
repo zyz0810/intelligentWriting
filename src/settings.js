@@ -1,5 +1,5 @@
 module.exports = {
-  title: '运营中心后台',
+  title: 'AI智能写作',
 
   /**
    * @type {boolean} true | false
