@@ -12,7 +12,8 @@
     <div class="right-menu">
       <el-button type="primary" @click="dialogFormVisible = true">登录/注册</el-button>
     </div>
-    <el-dialog :title="textMap[dialogStatus]" width="900px" :visible.sync="dialogFormVisible" class="login_dialog">
+    <el-dialog :title="textMap[dialogStatus]" width="900px" :close-on-click-modal="false" :visible.sync="dialogFormVisible" class="login_dialog" append-to-body>
+      <i class="el-icon-circle-close login_close" @click="dialogFormVisible = false"></i>
       <div class="flex">
         <div class="left_img">
           <div class="left_logo"><img src="./../../assets/image/logo.png"/></div>
@@ -92,7 +93,7 @@ export default {
       systemDate: "",
       name: getName() != "null" ? getName() : "",
       nowDate: "",
-      dialogFormVisible: true,
+      dialogFormVisible: false,
       textMap: {
         update: "修改密码",
       },
@@ -254,11 +255,20 @@ export default {
 
 <style lang="scss" scoped>
   .login_dialog{
+    /*position: relative;*/
     /deep/.el-dialog__header{
       display: none;
     }
     /deep/.el-dialog__body{
       padding: 0;
+    }
+    .login_close{
+      font-size: 20px;
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      z-index: 99;
+      cursor: pointer;
     }
   }
   .left_img{
