@@ -25,6 +25,10 @@
         <sidebar-item v-for="route in constantRoutes" :key="route.path" :item="route" :base-path="route.path" />
         <!--<sidebar-item v-for="route in $router.options.routes" :key="route.path" :item="route" :base-path="route.path" />-->
       </el-menu>
+
+      <div class="vip" @click="handleVip">
+        <img src="./../../../assets/image/vip_img01.png"/>
+      </div>
     </el-scrollbar>
   </div>
 </template>
@@ -66,11 +70,22 @@ export default {
       // return !this.sidebar.opened
       return false
     }
-  }
+  },
+  methods:{
+    handleVip(){
+      this.$router.push({path:'/vip/index',});
+    },
+  },
 }
 </script>
 <style lang="scss">
   .nav_create_dropdown{
     width: 210px;
+  }
+  .vip{
+    border-top: 1px solid #f2f2f2;
+    margin-top: 30px;
+    padding-top: 20px;
+    cursor: pointer;
   }
 </style>

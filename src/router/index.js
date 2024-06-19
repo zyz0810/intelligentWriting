@@ -66,31 +66,137 @@ export const constantRoutes = [
     component: () => import('@/views/error-page/401'),
     hidden: true
   },
+  // {
+  //   path: '/',
+  //   component: Layout,
+  //   redirect: '/dashboard',
+  //   children: [
+  //     {
+  //       path: 'dashboard',
+  //       component: () => import('@/views/dashboard/index'),
+  //       name: '首页',
+  //       meta: { title: '首页', icon: 'indexIcon', affix: true }
+  //     }
+  //   ]
+  // },
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        component: () => import('@/views/dashboard/index'),
-        name: '首页',
-        meta: { title: '首页', icon: 'indexIcon', affix: true }
-      }
-    ]
-  },
-  {
-    path: '/template',
-    component: Layout,
-    // redirect: '/template/index',
+    redirect: '/template/index',
     name: 'AI模板',
     meta: { title: 'AI模板', icon: 'indexIcon', affix: true },
     children: [
       {
-        path: 'index',
+        path: 'template/index',
         component: () => import('@/views/template/index'),
         name: 'AI模板',
         meta: { title: 'AI模板', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/recently',
+    component: Layout,
+    // redirect: '/template/index',
+    name: '最近',
+    meta: { title: '最近', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/recently/index'),
+        name: '最近',
+        meta: { title: '最近', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/star',
+    component: Layout,
+    // redirect: '/template/index',
+    name: '星标',
+    meta: { title: '星标', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/star/index'),
+        name: '星标',
+        meta: { title: '星标', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/share',
+    component: Layout,
+    // redirect: '/template/index',
+    name: '共享',
+    meta: { title: '共享', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/share/index'),
+        name: '共享',
+        meta: { title: '共享', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/task',
+    component: Layout,
+    // redirect: '/template/index',
+    name: '任务日程',
+    meta: { title: '任务日程', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/task/index'),
+        name: '任务日程',
+        meta: { title: '任务日程', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/my',
+    component: Layout,
+    // redirect: '/template/index',
+    name: '我的文档',
+    meta: { title: '我的文档', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/my/index'),
+        name: '我的文档',
+        meta: { title: '我的文档', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/recycle',
+    component: Layout,
+    // redirect: '/template/index',
+    name: '回收站',
+    meta: { title: '回收站', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/recycle/index'),
+        name: '回收站',
+        meta: { title: '回收站', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/vip',
+    component: Layout,
+    // redirect: '/template/index',
+    hidden: true,
+    name: 'vip',
+    meta: { title: 'vip', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/vip/index'),
+        name: 'vip',
+        meta: { title: 'vip', icon: 'indexIcon', affix: true }
       }
     ]
   },

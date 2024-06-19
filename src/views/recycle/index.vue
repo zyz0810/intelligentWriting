@@ -1,55 +1,38 @@
 <template>
   <div class="app-container">
+    <div class="div_container">
+      <div class="page_tit">回收站</div>
+      <el-table
+        v-loading="listLoading"
+        :data="dataList"
+        :header-cell-style="{ background: '#f5f7fa' }"
+        element-loading-text="拼命加载中"
+        ref="productTable"
+        :max-height="tableHeight"
+        highlight-current-row
+      >
+        <el-table-column label="文件名" align="left" prop="name" :min-width="global.tableValueWidth.tableNumberWidth" show-overflow-tooltip>
+          <template slot-scope="scope">
+            <i class="el-icon-document f16 clr_gray02 mr_3"></i>{{scope.row.name}}
+          </template>
+        </el-table-column>
+        <el-table-column label="创建者" align="center" prop="createName" :min-width="global.tableValueWidth.tableProductNameWidth" show-overflow-tooltip></el-table-column>
+        <el-table-column label="打开时间" align="center" prop="time" :min-width="global.tableValueWidth.tableSpecWidth" show-overflow-tooltip></el-table-column>
+        <el-table-column label=" " align="right" prop="collect" width="150">
+          <template slot-scope="scope">
+            <i :class="['el-icon-star-on','f20',scope.row.collect == 0 ? 'clr_gray01':'clr_green01']"></i>
+          </template>
+        </el-table-column>
+      </el-table>
 
-    <div class="create_box">
-      <p class="create_tit">快速创建</p>
-      <div class="flex">
-        <div class="create_item">
-          <div class="left_img"><img src="./../../assets/image/icon01.png"/></div>
-          <div class="right_txt">
-            <p class="first_txt">新建文档</p>
-            <p class="second_txt">新文本起草</p>
-          </div>
-        </div>
-        <div class="create_item">
-          <div class="left_img"><img src="./../../assets/image/icon02.png"/></div>
-          <div class="right_txt">
-            <p class="first_txt">上传文档</p>
-            <p class="second_txt">从本地上传文档</p>
-          </div>
-        </div>
-      </div>
+
+      <pagination :total="total"
+                  :page.sync="listQuery.page"
+                  :limit.sync="listQuery.limit"
+                  class="text-right"
+                  @pagination="search" />
     </div>
-    <div class="template_box">
-      <div class="template_tit">
-        <span class="f16">从AI模板创建</span>
-        <ul class="template_tab">
-          <li @click="templateTabIndex = item.id" :class="[templateTabIndex == item.id ? 'active':'']" v-for="(item,index) in templateTab" :key="'template_tab'+item">
-            {{item.name}}</li>
-        </ul>
-        <el-input class="template_search"
-          placeholder="搜索AI模板"
-          prefix-icon="el-icon-search"
-          v-model="templateSearch">
-        </el-input>
-      </div>
-      <div class="template_cont">
-        <div class="template_item" v-for="(item,index) in templateList" :key="'templateList'+index">
-          <div class="template_item_first">
-            <div class="template_item_first_left"><img src="./../../assets/image/icon03.png" /></div>
-            <div class="template_item_first_middle">智能写作</div>
-            <div class="template_item_first_right"><i class="el-icon-star-on f20"></i></div>
-          </div>
-          <div class="template_item_second">当你不知道用什么，试试这个</div>
-          <div class="template_item_third"><span class="bg_primary">使用</span></div>
-        </div>
-      </div>
-    </div>
-    <pagination :total="total"
-                :page.sync="listQuery.page"
-                :limit.sync="listQuery.limit"
-                class="text-right"
-                @pagination="search" />
+
     <detailDialog :showDialog.sync="showDialog"
                   :orderInfor="orderInfor" />
   </div>
@@ -64,29 +47,22 @@ export default {
   name: "orderList",
   data () {
     return {
-      templateTab:[{
-        id:0,
-        name:'我的收藏'
-      },{
+
+
+      templateSearch:'',
+      dataList: [{
         id:1,
-        name:'AI模板'
+        name:'未命名',
+        createName:'bobo',
+        time:'刚刚',
+        collect:1,
       },{
         id:2,
-        name:'媒体写作'
-      },{
-        id:3,
-        name:'短视频'
-      },{
-        id:4,
-        name:'学校教育'
-      },{
-        id:5,
-        name:'电商'
+        name:'未命名',
+        createName:'bobo',
+        time:'刚刚',
+        collect:0,
       }],
-      templateTabIndex:0,
-      templateList:[{id:0},{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7},{id:8},{id:9},{id:10},{id:11},{id:12},{id:13},{id:14},{id:15}],
-      templateSearch:'',
-      dataList: [],
       total: 0,
       listLoading: false,
       showDialog: false,
@@ -323,8 +299,19 @@ export default {
 
 <style lang="scss" scoped>
 .app-container {
-  height: calc(100vh - 84px);
+  /*background: #fff;*/
+  height: calc(100vh - 56px);
   overflow: auto;
+}
+.div_container{
+  background: #fff;
+  height: calc(100vh - 76px);
+  padding: 20px;
+  border-radius: 4px;
+  .page_tit{
+    font-size: 14px;
+    line-height: 2;
+  }
 }
 .create_box{
   background: #fff;

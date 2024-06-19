@@ -10,102 +10,52 @@
 <!--    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />-->
     <el-input prefix-icon="el-icon-search" class="search_top" v-model="searchText" placeholder="搜索我的档名"></el-input>
     <div class="right-menu">
-
-      <el-button type="primary">登录/注册</el-button>
-<!--      <el-dropdown-->
-<!--        class="avatar-container right-menu-item hover-effect"-->
-<!--        trigger="click"-->
-<!--      >-->
-<!--        <div class="avatar-wrapper">-->
-<!--          &lt;!&ndash;<img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">&ndash;&gt;-->
-<!--          <img :src="headImg" class="user-avatar" />-->
-<!--          <span style="float: right; margin: 0 5px; font-size: 14px">{{-->
-<!--            name-->
-<!--          }}</span>-->
-<!--          <i class="el-icon-caret-bottom" />-->
-<!--        </div>-->
-<!--        <el-dropdown-menu slot="dropdown" class="text-center">-->
-<!--          &lt;!&ndash;          <router-link to="/profile/index">&ndash;&gt;-->
-<!--          &lt;!&ndash;            <el-dropdown-item>Profile</el-dropdown-item>&ndash;&gt;-->
-<!--          &lt;!&ndash;          </router-link>&ndash;&gt;-->
-<!--          &lt;!&ndash;          <router-link to="/">&ndash;&gt;-->
-<!--          &lt;!&ndash;            <el-dropdown-item>Dashboard</el-dropdown-item>&ndash;&gt;-->
-<!--          &lt;!&ndash;          </router-link>&ndash;&gt;-->
-<!--          &lt;!&ndash;          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">&ndash;&gt;-->
-<!--          &lt;!&ndash;            <el-dropdown-item>Github</el-dropdown-item>&ndash;&gt;-->
-<!--          &lt;!&ndash;          </a>&ndash;&gt;-->
-<!--          &lt;!&ndash;          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">&ndash;&gt;-->
-<!--          &lt;!&ndash;            <el-dropdown-item>Docs</el-dropdown-item>&ndash;&gt;-->
-<!--          &lt;!&ndash;          </a>&ndash;&gt;-->
-<!--          <el-dropdown-item divided @click.native="updatePassword">-->
-<!--            <span style="display: block">修改密码</span>-->
-<!--          </el-dropdown-item>-->
-<!--          <el-dropdown-item divided @click.native="logout">-->
-<!--            <span style="display: block">退 出</span>-->
-<!--          </el-dropdown-item>-->
-<!--        </el-dropdown-menu>-->
-<!--      </el-dropdown>-->
+      <el-button type="primary" @click="dialogFormVisible = true">登录/注册</el-button>
     </div>
-    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
-      <el-form
-        ref="dataForm"
-        :rules="rules"
-        :model="passwordTemp"
-        label-width="120px"
-        style="width: 400px; margin-left: 50px"
-        v-if="dialogStatus != 'updatePassword'"
-      >
-        <el-form-item label="手机号" prop="mobile">
-          <el-input
-            v-model="passwordTemp.mobile"
-            placeholder="请输入手机号"
-            type="number"
-            autocomplete="off"
-            :disabled="true"
-          />
-        </el-form-item>
-        <el-form-item label="验证码" prop="verifyCode" class="get_code">
-          <el-input
-            v-model="passwordTemp.verifyCode"
-            placeholder="请输入验证码"
-            type="number"
-            autocomplete="off"
-          />
-          <el-button type="primary" @click="getCode" :disabled="disabled">{{
-            codeTxt
-          }}</el-button>
-        </el-form-item>
-        <el-form-item label="新密码" prop="password">
-          <el-input
-            v-model="passwordTemp.password"
-            placeholder="请输入新密码"
-            type="password"
-            minlength="6"
-            maxlength="16"
-            :show-password="true"
-            autocomplete="off"
-          />
-        </el-form-item>
-        <el-form-item label="确认密码" prop="confirmPassword">
-          <el-input
-            v-model="passwordTemp.confirmPassword"
-            placeholder="请再次输入密码"
-            type="password"
-            minlength="6"
-            maxlength="16"
-            :show-password="true"
-            autocomplete="off"
-          />
-        </el-form-item>
-      </el-form>
-      <div
-        slot="footer"
-        class="dialog-footer"
-        v-if="dialogStatus != 'updatePassword'"
-      >
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updateData()">确 定</el-button>
+    <el-dialog :title="textMap[dialogStatus]" width="900px" :visible.sync="dialogFormVisible" class="login_dialog">
+      <div class="flex">
+        <div class="left_img">
+          <div class="left_logo"><img src="./../../assets/image/logo.png"/></div>
+          <p class="left_txt_one">AI创作、AI绘画</p>
+          <p class="left_txt_two">一键生成营销文章、小红书体文章、短文、小说</p>
+        </div>
+        <div class="right_form">
+          <el-form ref="dataForm" class="login_form" :rules="rules" :model="passwordTemp" style="width: 400px; " :hide-required-asterisk="true" v-if="dialogStatus != 'weixin'">
+            <p class="login_tit">手机号登录/注册</p>
+            <el-form-item label=" " prop="mobile">
+              <el-input v-model="passwordTemp.mobile" prefix="+86" size="medium" placeholder="请输入手机号" type="number" autocomplete="off">
+                <template slot="prepend">+86</template>
+              </el-input>
+            </el-form-item>
+            <el-form-item label=" " prop="verifyCode" class="get_code">
+              <el-input size="medium" v-model="passwordTemp.verifyCode" placeholder="请输入验证码" type="number" autocomplete="off"/>
+              <el-button type="primary" class="code_btn" @click="getCode" :disabled="disabled">{{codeTxt}}</el-button>
+            </el-form-item>
+            <el-button type="primary" class="login_btn" @click="updateData()">立即注册/登录</el-button>
+          </el-form>
+          <div v-if="dialogStatus == 'weixin'">
+            <div class="login_erm">
+              <img src="https://img1.baidu.com/it/u=3685234108,954911792&fm=253&fmt=auto&app=138&f=GIF?w=200&h=200"/>
+              <div class="login_ewm_expire" v-show="expire == true" @click="handleEWM">
+                <i class="el-icon-refresh-right"></i>
+                <p>二维码已过期，点击刷新</p>
+              </div>
+            </div>
+            <p class="f20 text-center">微信扫码安全登录</p>
+          </div>
+          <p class="login_txt">登录即表示阅读并同意，<a href="#">《服务协议》</a></p>
+          <span class="login_mode" v-show="dialogStatus != 'weixin'" @click="dialogStatus='weixin'">微信登录</span>
+          <span class="login_mode" v-show="dialogStatus == 'weixin'" @click="dialogStatus='mobile'">手机登录</span>
+<!--          <div slot="footer" class="dialog-footer" v-if="dialogStatus != 'updatePassword'">-->
+<!--            <el-button @click="dialogFormVisible = false">取 消</el-button>-->
+<!--            <el-button type="primary" @click="updateData()">确 定</el-button>-->
+<!--          </div>-->
+        </div>
+
       </div>
+
+
+
     </el-dialog>
   </div>
 </template>
@@ -137,15 +87,16 @@ import { getSmsCode } from "@/api/code";
 export default {
   data() {
     return {
+      expire:false,
       headImg: headImg,
       systemDate: "",
       name: getName() != "null" ? getName() : "",
       nowDate: "",
-      dialogFormVisible: false,
+      dialogFormVisible: true,
       textMap: {
         update: "修改密码",
       },
-      dialogStatus: "",
+      dialogStatus: "weixin",
       temp: {
         oldPassword: "",
       },
@@ -192,6 +143,9 @@ export default {
     ...mapGetters(["sidebar", "avatar", "device"]),
   },
   methods: {
+    handleEWM(){
+      this.expire = false;
+    },
     getRule() {
       this.$router.push({ path: "/rule" });
     },
@@ -299,13 +253,132 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .login_dialog{
+    /deep/.el-dialog__header{
+      display: none;
+    }
+    /deep/.el-dialog__body{
+      padding: 0;
+    }
+  }
+  .left_img{
+    min-width: 50%;
+    height: 460px;
+    background: url("./../../assets/image/login_img01.png") no-repeat 100% 100%;
+    padding: 40px 0 0 50px;
+    .left_logo{
+      width: 130px;
+      margin-bottom: 20px;
+    }
+    .left_txt_one{
+      color: #000;
+      font-size: 30px;
+      font-weight: 500;
+    }
+    .left_txt_two{
+      color: #636363;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 3;
+    }
+  }
+  .right_form{
+    margin-left: 20px;
+    width: 400px;
+    .login_form{
+      /deep/.el-input__inner{
+        height: 50px;
+        line-height: 50px;
+      }
+    }
+  }
+  .login_erm{
+    position: relative;
+    width: 205px;
+    height: 205px;
+    border-radius: 10px;
+    border: 1px solid #E2E2E2;
+    margin: 53px auto 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img{
+      width: 180px;
+      height: 180px;
+
+    }
+    .login_ewm_expire{
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      i{
+        font-size: 40px;
+        color:#3370FF;
+        font-weight: bold;
+        display: block;
+        margin-bottom: 10px;
+      }
+      p{
+        color: #3D3D3D;
+        font-size: 14px;
+        font-weight: 500;
+      }
+    }
+  }
+  .login_tit{
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 2;
+    text-align: center;
+    margin: 50px 0 25px;
+  }
+  .code_btn{
+    background: transparent;
+    border: none;
+    color: #009CFF;
+  }
+  .login_txt{
+    text-align: center;
+    margin: 10px 0 50px;
+    color: #999;
+    a{
+      color: #3971E8;
+    }
+  }
+  .login_mode{
+    background: #F3F3F3;
+    border-radius: 4px;
+    width: 197px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+  }
 .get_code {
   position: relative;
+
   button {
     position: absolute;
     top: 0;
     right: 0;
+    height: 32px;
+    line-height: 32px;
   }
+}
+.login_btn{
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
 }
 .navbar {
   height: 56px;

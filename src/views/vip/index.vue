@@ -1,92 +1,125 @@
 <template>
   <div class="app-container">
+    <div class="vip_container flex">
+     <div class="vip_item">
+       <div class="vip_top">
+         <p class="vip_top_one">免费版</p>
+         <p class="vip_top_two">AI智能创作</p>
+       </div>
+       <div class="vip_middle">
+         <p class="vip_middle_one"><span class="f12">￥</span>0</p>
+         <p class="vip_middle_two">免费</p>
+         <el-button class="vip_middle_btn">去使用</el-button>
+       </div>
+       <div class="vip_bottom">
+         <p><i class="el-icon-check clr_blue01"></i>AI智能写作</p>
+         <p><i class="el-icon-check clr_blue01"></i>AI伪原创</p>
+         <p><i class="el-icon-close clr_red01"></i>AI对话</p>
+         <p><i class="el-icon-check clr_blue01"></i>文章续写</p>
+         <p><i class="el-icon-close clr_red01"></i>文案提取</p>
+         <p><i class="el-icon-close clr_red01"></i>智能纠错</p>
+         <p><i class="el-icon-close clr_red01"></i>多人协同</p>
+         <p><i class="el-icon-check clr_blue01"></i>断句改写</p>
+         <p class="bold"><i class="el-icon-check clr_blue01"></i>基本模型：2000字/天</p>
+       </div>
+     </div>
+      <div class="vip_item">
+        <div class="vip_top">
+          <p class="vip_top_one">基础班/月</p>
+          <p class="vip_top_two">智能纠错；高级模型</p>
+        </div>
+        <div class="vip_middle">
+          <p class="vip_middle_one"><span class="f12">￥</span>24</p>
+          <s class="vip_middle_two clr_red01">原价48/月，限时5折优惠</s>
+          <el-button class="vip_middle_btn vip_middle_btn_two">立即升级</el-button>
+        </div>
+        <div class="vip_bottom">
+          <p><i class="el-icon-check clr_blue01"></i>AI智能写作</p>
+          <p><i class="el-icon-check clr_blue01"></i>AI伪原创</p>
+          <p><i class="el-icon-check clr_blue01"></i>AI对话</p>
+          <p><i class="el-icon-check clr_blue01"></i>文章续写</p>
+          <p><i class="el-icon-close clr_red01"></i>文案提取</p>
+          <p><i class="el-icon-check clr_blue01"></i>智能纠错</p>
+          <p><i class="el-icon-check clr_blue01"></i>多人协同</p>
+          <p><i class="el-icon-check clr_blue01"></i>断句改写</p>
+          <p class="bold"><i class="el-icon-check clr_blue01"></i>基本模型：2000字/天</p>
+        </div>
+      </div>
+      <div class="vip_item">
+        <div class="vip_top">
+          <p class="vip_top_one">专业版/年</p>
+          <p class="vip_top_two">文案提取，多种写作能力</p>
+        </div>
+        <div class="vip_middle">
+          <p class="vip_middle_one"><span class="f12">￥</span>69</p>
+          <s class="vip_middle_two clr_red01">原价96/年，限时5折优惠</s>
+          <el-button class="vip_middle_btn vip_middle_btn_three">立即升级</el-button>
+        </div>
+        <div class="vip_bottom">
+          <p><i class="el-icon-check clr_blue01"></i>AI智能写作</p>
+          <p><i class="el-icon-check clr_blue01"></i>AI伪原创</p>
+          <p><i class="el-icon-check clr_blue01"></i>AI对话</p>
+          <p><i class="el-icon-check clr_blue01"></i>文章续写</p>
+          <p><i class="el-icon-check clr_blue01"></i>文案提取</p>
+          <p><i class="el-icon-check clr_blue01"></i>智能纠错</p>
+          <p><i class="el-icon-check clr_blue01"></i>多人协同</p>
+          <p><i class="el-icon-check clr_blue01"></i>断句改写</p>
+          <p class="bold"><i class="el-icon-check clr_blue01"></i>基本模型：2000字/天</p>
+        </div>
+      </div>
+      <div class="vip_item">
+        <div class="vip_top">
+          <p class="vip_top_one">团队版</p>
+          <p class="vip_top_two">企业/团队协同</p>
+        </div>
+        <div class="vip_middle">
+          <p class="vip_middle_one"><span class="f12">￥</span>399</p>
+          <s class="vip_middle_two clr_red01">原价599/月，最多20个账号</s>
+          <el-button class="vip_middle_btn vip_middle_btn_four">立即升级</el-button>
+        </div>
+        <div class="vip_bottom">
+          <p><i class="el-icon-check clr_blue01"></i>AI智能写作</p>
+          <p><i class="el-icon-check clr_blue01"></i>AI伪原创</p>
+          <p><i class="el-icon-check clr_blue01"></i>AI对话</p>
+          <p><i class="el-icon-check clr_blue01"></i>文章续写</p>
+          <p><i class="el-icon-check clr_blue01"></i>文案提取</p>
+          <p><i class="el-icon-check clr_blue01"></i>智能纠错</p>
+          <p><i class="el-icon-check clr_blue01"></i>多人协同</p>
+          <p><i class="el-icon-check clr_blue01"></i>断句改写</p>
+          <p class="bold"><i class="el-icon-check clr_blue01"></i>基本模型：2000字/天</p>
+        </div>
+      </div>
+    </div>
 
-    <div class="create_box">
-      <p class="create_tit">快速创建</p>
-      <div class="flex">
-        <div class="create_item">
-          <div class="left_img"><img src="./../../assets/image/icon01.png"/></div>
-          <div class="right_txt">
-            <p class="first_txt">新建文档</p>
-            <p class="second_txt">新文本起草</p>
-          </div>
-        </div>
-        <div class="create_item">
-          <div class="left_img"><img src="./../../assets/image/icon02.png"/></div>
-          <div class="right_txt">
-            <p class="first_txt">上传文档</p>
-            <p class="second_txt">从本地上传文档</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="template_box">
-      <div class="template_tit">
-        <span class="f16">从AI模板创建</span>
-        <ul class="template_tab">
-          <li @click="templateTabIndex = item.id" :class="[templateTabIndex == item.id ? 'active':'']" v-for="(item,index) in templateTab" :key="'template_tab'+item">
-            {{item.name}}</li>
-        </ul>
-        <el-input class="template_search"
-          placeholder="搜索AI模板"
-          prefix-icon="el-icon-search"
-          v-model="templateSearch">
-        </el-input>
-      </div>
-      <div class="template_cont">
-        <div class="template_item" v-for="(item,index) in templateList" :key="'templateList'+index">
-          <div class="template_item_first">
-            <div class="template_item_first_left"><img src="./../../assets/image/icon03.png" /></div>
-            <div class="template_item_first_middle">智能写作</div>
-            <div class="template_item_first_right"><i class="el-icon-star-on f20"></i></div>
-          </div>
-          <div class="template_item_second">当你不知道用什么，试试这个</div>
-          <div class="template_item_third"><span class="bg_primary">使用</span></div>
-        </div>
-      </div>
-    </div>
-    <pagination :total="total"
-                :page.sync="listQuery.page"
-                :limit.sync="listQuery.limit"
-                class="text-right"
-                @pagination="search" />
-    <detailDialog :showDialog.sync="showDialog"
-                  :orderInfor="orderInfor" />
+
   </div>
 </template>
 
 <script>
 import { search, exportList } from "@/api/validReturn";
 import { mapState } from "vuex";
-import detailDialog from "./detail";
+
 import AdminApi from "@/api/export";
 export default {
   name: "orderList",
   data () {
     return {
-      templateTab:[{
-        id:0,
-        name:'我的收藏'
-      },{
+
+
+      templateSearch:'',
+      dataList: [{
         id:1,
-        name:'AI模板'
+        name:'未命名',
+        createName:'bobo',
+        time:'刚刚',
+        collect:1,
       },{
         id:2,
-        name:'媒体写作'
-      },{
-        id:3,
-        name:'短视频'
-      },{
-        id:4,
-        name:'学校教育'
-      },{
-        id:5,
-        name:'电商'
+        name:'未命名',
+        createName:'bobo',
+        time:'刚刚',
+        collect:0,
       }],
-      templateTabIndex:0,
-      templateList:[{id:0},{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7},{id:8},{id:9},{id:10},{id:11},{id:12},{id:13},{id:14},{id:15}],
-      templateSearch:'',
-      dataList: [],
       total: 0,
       listLoading: false,
       showDialog: false,
@@ -109,7 +142,7 @@ export default {
       exportLoading: false,
     };
   },
-  components: { detailDialog },
+  components: {  },
   computed: {
     ...mapState({
       roles: (state) => state.user.roles,
@@ -323,135 +356,93 @@ export default {
 
 <style lang="scss" scoped>
 .app-container {
-  height: calc(100vh - 84px);
+  /*background: #fff;*/
+  height: calc(100vh - 56px);
   overflow: auto;
 }
-.create_box{
+.vip_container{
   background: #fff;
-  padding: 10px;
+  height: calc(100vh - 76px);
+  padding: 20px;
   border-radius: 4px;
-  .create_tit{
-    font-size: 16px;
-    line-height: 30px;
-  }
-  .create_item{
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    border-radius: 4px;
-    background: #F7F8FA;
-    min-width: 230px;
-    margin-right: 10px;
-    .left_img{
-      width: 36px;
-      height: 36px;
-      margin-right: 10px;
+  align-items: center;
+  justify-content: center;
+}
+.vip_item{
+  width: 200px;
+  border-radius: 10px;
+  border: 1px solid #EBEBEB;
+  margin: 20px 10px;
+  &:nth-child(1){
+    .vip_top {
+      background: url("./../../assets/image/vip_img02.png") no-repeat 100% 100%;
     }
-    .first_txt{
-      color:#2B3F66;
+  }
+  &:nth-child(2){
+    .vip_top {
+      background: url("./../../assets/image/vip_img03.png") no-repeat 100% 100%;
+    }
+  }
+  &:nth-child(3){
+    .vip_top {
+      background: url("./../../assets/image/vip_img04.png") no-repeat 100% 100%;
+    }
+  }
+  &:nth-child(4){
+    .vip_top {
+      background: url("./../../assets/image/vip_img05.png") no-repeat 100% 100%;
+    }
+  }
+  .vip_top{
+    height: 85px;
+    color: #fff;
+    padding: 20px 10px 0;
+    /*background: url("./../../assets/image/vip_img02.png") no-repeat 100% 100%;*/
+    .vip_top_one{
+      font-size: 20px;
+      /*padding-top: 20px;*/
+      line-height: 1.6;
+    }
+    .vip_top_two{
       font-size: 14px;
     }
-    .second_txt{
-      color:#707E98;
-      font-size: 12px;
-      margin-top: 5px;
+
+  }
+  .vip_middle{
+    padding: 20px 10px;
+  }
+  .vip_middle_one{
+    font-size: 32px;
+  }
+  .vip_middle_two{
+    font-size: 12px;
+    line-height: 2;
+  }
+  .vip_middle_btn{
+    width: 100%;
+    margin-top: 20px;
+    &.vip_middle_btn_two{
+      color: #fff;
+      background: #6488CB;
+    }
+    &.vip_middle_btn_three{
+      color: #fff;
+      background: #CAA865;
+    }
+    &.vip_middle_btn_four{
+      color: #fff;
+      background: #454665;
     }
   }
-}
-.template_box{
-  margin: 20px 0;
-  .template_tit{
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-    margin: 10px 0 5px;
-  }
-  .template_search{
-    width: 226px;
-  }
-  .template_tab{
-    margin-left: 20px;
-    display: flex;
-    align-items: center;
-    flex: 1;
-    li{
-      cursor: pointer;
-      display: inline-block;
-      padding: 0 6px;
+  .vip_bottom{
+    font-size: 12px;
+    line-height: 2.6;
+    padding: 20px 10px;
+    i{
+      font-weight: bold;
       margin-right: 5px;
-      line-height: 24px;
-      border-radius: 4px;
-      &.active{
-        background: #fff;
-      }
-    }
-  }
-  .template_cont{
-    display: flex;
-    flex-wrap: wrap;
-    flex-shrink: 0;
-  }
-  .template_item{
-    cursor: pointer;
-    padding: 10px;
-    margin: 5px 10px 5px 0;
-    border-radius: 4px;
-    width: calc(25% - 8.4px);
-    background: #fff;
-    &:nth-child(4n){
-      margin: 5px 0 5px 0;
-    }
-    .template_item_first{
-      display: flex;
-      align-items: center;
-      .template_item_first_left{
-        width: 14px;
-        margin-right: 5px;
-        img{
-          width: 14px;
-          height: 14px;
-        }
-      }
-      .template_item_first_middle{
-        font-size: 14px;
-        flex: 1;
-      }
-      .template_item_first_right{
-        width: 30px;
-        text-align: right;
-        color: #E7E7E7;
-      }
-    }
-    .template_item_second{
-      font-size: 12px;
-      color: #707E98;
-      margin-top: 10px;
-      height: 3em;
-    }
-    .template_item_third{
-      text-align: right;
-      span{
-        display: inline-block;
-        padding: 0 13px;
-        color: #fff;
-        font-size: 12px;
-        line-height: 24px;
-        border-radius: 30px;
-        /*background: #2CB1B1;*/
-      }
     }
   }
 }
 
-.refundStatus {
-  color: #409eff;
-  text-decoration: underline;
-}
-.refund_tab {
-  height: auto;
-  /deep/.el-tabs__content {
-    height: auto;
-  }
-}
 </style>
