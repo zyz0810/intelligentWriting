@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout, getInfo, getQRCode, checkLoginInfo } from '@/api/user'
 import { findMenuByRole } from '@/api/menu'
 import { getToken, setToken, removeToken,getId,setId,removeId,getName,setName,removeName,getMobile,setMobile,removeMobile} from '@/utils/auth'
 import router, { resetRouter } from '@/router'
@@ -13,7 +13,7 @@ const state = {
   introduction: '',
   roles: [],
   id:undefined,
-  admin_mobile:''
+  admin_mobile:'',
 }
 
 const mutations = {
@@ -59,6 +59,30 @@ const actions = {
     })
   },
 
+
+  /**
+   * 查询登录状态
+   * @param {二维码图片返回的seceneId} param0 
+   * @returns 
+   */
+  getWxLoginStatus({commit}, secene) {
+    return new Promise((resolve, reject) => {
+      checkLoginInfo(secene).then(response => {
+        const { data } = response;
+        if (response.data) {
+          commit('SET_TOKEN', response.data.token);
+          commit('SET_NAME', response.data.user_nickname);
+          commit('SET_AVATAR', response.data.avatar);
+          resolve()
+        } else {
+          reject()
+        }
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
@@ -82,29 +106,6 @@ const actions = {
           }
           commit('SET_ROLES', role);
           resolve( role);
-          // findMenuByRole({roleId:response.data.sysRoles[0].id}).then(res=>{
-          //   if (!res.data) {
-          //     reject('请添加权限')
-          //   }
-          //   // const { roles, name, avatar, introduction } = data
-          //
-          //   let roles=[];
-          //   for(let i =0;i<res.data.length;i++){
-          //     roles.push(res.data[i].name)
-          //   }
-          //   console.log('权限')
-          //   console.log(roles)
-          //
-          //   // roles must be a non-empty array
-          //   if (!roles || roles.length <= 0) {
-          //     roles = ['首页'];
-          //     commit('SET_ROLES', roles);
-          //     resolve(roles);
-          //     reject('没有权限')
-          //   }
-          //   commit('SET_ROLES', roles)
-          //   resolve(roles)
-          // })
         }else{
           commit('SET_ID', '');
           commit('SET_TOKEN', '');

@@ -1,42 +1,83 @@
 <template>
   <div class="navbar">
-<!--    <hamburger-->
-<!--      id="hamburger-container"-->
-<!--      :is-active="sidebar.opened"-->
-<!--      class="hamburger-container"-->
-<!--      @toggleClick="toggleSideBar"-->
-<!--    />-->
+    <!--    <hamburger-->
+    <!--      id="hamburger-container"-->
+    <!--      :is-active="sidebar.opened"-->
+    <!--      class="hamburger-container"-->
+    <!--      @toggleClick="toggleSideBar"-->
+    <!--    />-->
 
-<!--    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />-->
-    <el-input prefix-icon="el-icon-search" class="search_top" v-model="searchText" placeholder="搜索我的档名"></el-input>
+    <!--    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />-->
+    <el-input
+      prefix-icon="el-icon-search"
+      class="search_top"
+      v-model="searchText"
+      placeholder="搜索我的档名"
+    ></el-input>
     <div class="right-menu">
-      <el-button type="primary" @click="dialogFormVisible = true">登录/注册</el-button>
+      <el-button type="primary" @click="changeDialogFormVisible">登录/注册</el-button>
     </div>
-    <el-dialog :title="textMap[dialogStatus]" width="900px" :close-on-click-modal="false" :visible.sync="dialogFormVisible" class="login_dialog" append-to-body>
-      <i class="el-icon-circle-close login_close" @click="dialogFormVisible = false"></i>
+    <el-dialog
+      :title="textMap[dialogStatus]"
+      width="900px"
+      :close-on-click-modal="false"
+      :visible.sync="dialogFormVisible"
+      class="login_dialog"
+      append-to-body
+    >
+      <i class="el-icon-circle-close login_close" @click="changeDialogFormInVisible"></i>
       <div class="flex">
         <div class="left_img">
-          <div class="left_logo"><img src="./../../assets/image/logo.png"/></div>
+          <div class="left_logo"><img src="./../../assets/image/logo.png" /></div>
           <p class="left_txt_one">AI创作、AI绘画</p>
           <p class="left_txt_two">一键生成营销文章、小红书体文章、短文、小说</p>
         </div>
         <div class="right_form">
-          <el-form ref="dataForm" class="login_form" :rules="rules" :model="passwordTemp" style="width: 400px; " :hide-required-asterisk="true" v-if="dialogStatus != 'weixin'">
+          <el-form
+            ref="dataForm"
+            class="login_form"
+            :rules="rules"
+            :model="passwordTemp"
+            style="width: 400px"
+            :hide-required-asterisk="true"
+            v-if="dialogStatus != 'weixin'"
+          >
             <p class="login_tit">手机号登录/注册</p>
             <el-form-item label=" " prop="mobile">
-              <el-input v-model="passwordTemp.mobile" prefix="+86" size="medium" placeholder="请输入手机号" type="number" autocomplete="off">
+              <el-input
+                v-model="passwordTemp.mobile"
+                prefix="+86"
+                size="medium"
+                placeholder="请输入手机号"
+                type="number"
+                autocomplete="off"
+              >
                 <template slot="prepend">+86</template>
               </el-input>
             </el-form-item>
             <el-form-item label=" " prop="verifyCode" class="get_code">
-              <el-input size="medium" v-model="passwordTemp.verifyCode" placeholder="请输入验证码" type="number" autocomplete="off"/>
-              <el-button type="primary" class="code_btn" @click="getCode" :disabled="disabled">{{codeTxt}}</el-button>
+              <el-input
+                size="medium"
+                v-model="passwordTemp.verifyCode"
+                placeholder="请输入验证码"
+                type="number"
+                autocomplete="off"
+              />
+              <el-button
+                type="primary"
+                class="code_btn"
+                @click="getCode"
+                :disabled="disabled"
+                >{{ codeTxt }}</el-button
+              >
             </el-form-item>
-            <el-button type="primary" class="login_btn" @click="updateData()">立即注册/登录</el-button>
+            <el-button type="primary" class="login_btn" @click="updateData()"
+              >立即注册/登录</el-button
+            >
           </el-form>
           <div v-if="dialogStatus == 'weixin'">
             <div class="login_erm">
-              <img src="https://img1.baidu.com/it/u=3685234108,954911792&fm=253&fmt=auto&app=138&f=GIF?w=200&h=200"/>
+              <img v-if="wxQrCode" :src="wxQrCode" />
               <div class="login_ewm_expire" v-show="expire == true" @click="handleEWM">
                 <i class="el-icon-refresh-right"></i>
                 <p>二维码已过期，点击刷新</p>
@@ -45,18 +86,24 @@
             <p class="f20 text-center">微信扫码安全登录</p>
           </div>
           <p class="login_txt">登录即表示阅读并同意，<a href="#">《服务协议》</a></p>
-          <span class="login_mode" v-show="dialogStatus != 'weixin'" @click="dialogStatus='weixin'">微信登录</span>
-          <span class="login_mode" v-show="dialogStatus == 'weixin'" @click="dialogStatus='mobile'">手机登录</span>
-<!--          <div slot="footer" class="dialog-footer" v-if="dialogStatus != 'updatePassword'">-->
-<!--            <el-button @click="dialogFormVisible = false">取 消</el-button>-->
-<!--            <el-button type="primary" @click="updateData()">确 定</el-button>-->
-<!--          </div>-->
+          <span
+            class="login_mode"
+            v-show="dialogStatus != 'weixin'"
+            @click="dialogStatus = 'weixin'"
+            >微信登录</span
+          >
+          <span
+            class="login_mode"
+            v-show="dialogStatus == 'weixin'"
+            @click="dialogStatus = 'mobile'"
+            >手机登录</span
+          >
+          <!--          <div slot="footer" class="dialog-footer" v-if="dialogStatus != 'updatePassword'">-->
+          <!--            <el-button @click="dialogFormVisible = false">取 消</el-button>-->
+          <!--            <el-button type="primary" @click="updateData()">确 定</el-button>-->
+          <!--          </div>-->
         </div>
-
       </div>
-
-
-
     </el-dialog>
   </div>
 </template>
@@ -83,12 +130,13 @@ import {
   getMobile,
 } from "@/utils/auth";
 import { validUsername, validatePhone, isPassword } from "@/utils/validate";
-import { updatePassword } from "@/api/user";
+import { checkLoginInfo, updatePassword } from "@/api/user";
+import { getQRCode } from "@/api/user";
 import { getSmsCode } from "@/api/code";
 export default {
   data() {
     return {
-      expire:false,
+      expire: false,
       headImg: headImg,
       systemDate: "",
       name: getName() != "null" ? getName() : "",
@@ -110,9 +158,7 @@ export default {
           { required: true, message: "请输入手机号码", trigger: "change" },
           { validator: validatePhone },
         ],
-        verifyCode: [
-          { required: true, message: "请输入验证码", trigger: "change" },
-        ],
+        verifyCode: [{ required: true, message: "请输入验证码", trigger: "change" }],
         confirmPassword: [
           { required: true, message: "请再次输入密码", trigger: "change" },
           { validator: isPassword },
@@ -126,7 +172,9 @@ export default {
       },
       codeTxt: "获取验证码",
       disabled: false,
-      searchText:'',
+      searchText: "",
+      wxQrCode: "", //微信二维码
+      senceId: "", // 二维码扫码返回的查询id
     };
   },
   components: {
@@ -143,9 +191,21 @@ export default {
     }),
     ...mapGetters(["sidebar", "avatar", "device"]),
   },
+
+  watch: {
+    senceId(newVal, oldVal) {
+      if (newVal != "" && getToken() == "") {
+        setInterval(checkLoginInfo(newVal), 3000);
+      }
+    },
+    
+
+  },
+
   methods: {
-    handleEWM(){
+    handleEWM() {
       this.expire = false;
+      this.getWxQrImage();
     },
     getRule() {
       this.$router.push({ path: "/rule" });
@@ -175,6 +235,27 @@ export default {
           .catch(() => {});
       }
     },
+
+    getWxQrImage() {
+      if (this.dialogStatus == "weixin") {
+        getQRCode()
+          .then((res) => {
+            this.senceId = res.data.scene_id;
+            this.wxQrCode = res.data.qr_url;
+          })
+          .catch((err) => {});
+      }
+    },
+
+    changeDialogFormVisible() {
+      this.dialogFormVisible = true;
+      this.getWxQrImage();
+    },
+
+    changeDialogFormInVisible() {
+      this.dialogFormVisible = false;
+    },
+
     countdown2(that) {
       let setTime = 60;
       let time = setTime;
@@ -228,6 +309,7 @@ export default {
       // this.$router.push(`/login?redirect=${this.$route.fullPath}`)
       this.$router.push(`/login?redirect=/dashboard`);
     },
+
     // addDate() {
     //   let nowDate = new Date();
     //   this.nowDate = new Date();
@@ -254,126 +336,125 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .login_dialog{
-    /*position: relative;*/
-    /deep/.el-dialog__header{
-      display: none;
-    }
-    /deep/.el-dialog__body{
-      padding: 0;
-    }
-    .login_close{
-      font-size: 20px;
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      z-index: 99;
-      cursor: pointer;
-    }
+.login_dialog {
+  /*position: relative;*/
+  /deep/.el-dialog__header {
+    display: none;
   }
-  .left_img{
-    min-width: 50%;
-    height: 460px;
-    background: url("./../../assets/image/login_img01.png") no-repeat 100% 100%;
-    padding: 40px 0 0 50px;
-    .left_logo{
-      width: 130px;
-      margin-bottom: 20px;
-    }
-    .left_txt_one{
-      color: #000;
-      font-size: 30px;
-      font-weight: 500;
-    }
-    .left_txt_two{
-      color: #636363;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 3;
-    }
+  /deep/.el-dialog__body {
+    padding: 0;
   }
-  .right_form{
-    margin-left: 20px;
-    width: 400px;
-    .login_form{
-      /deep/.el-input__inner{
-        height: 50px;
-        line-height: 50px;
-      }
-    }
-  }
-  .login_erm{
-    position: relative;
-    width: 205px;
-    height: 205px;
-    border-radius: 10px;
-    border: 1px solid #E2E2E2;
-    margin: 53px auto 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img{
-      width: 180px;
-      height: 180px;
-
-    }
-    .login_ewm_expire{
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255,255,255,.9);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      i{
-        font-size: 40px;
-        color:#3370FF;
-        font-weight: bold;
-        display: block;
-        margin-bottom: 10px;
-      }
-      p{
-        color: #3D3D3D;
-        font-size: 14px;
-        font-weight: 500;
-      }
-    }
-  }
-  .login_tit{
+  .login_close {
     font-size: 20px;
-    font-weight: 500;
-    line-height: 2;
-    text-align: center;
-    margin: 50px 0 25px;
-  }
-  .code_btn{
-    background: transparent;
-    border: none;
-    color: #009CFF;
-  }
-  .login_txt{
-    text-align: center;
-    margin: 10px 0 50px;
-    color: #999;
-    a{
-      color: #3971E8;
-    }
-  }
-  .login_mode{
-    background: #F3F3F3;
-    border-radius: 4px;
-    width: 197px;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    display: block;
-    margin: 0 auto;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 99;
     cursor: pointer;
   }
+}
+.left_img {
+  min-width: 50%;
+  height: 460px;
+  background: url("./../../assets/image/login_img01.png") no-repeat 100% 100%;
+  padding: 40px 0 0 50px;
+  .left_logo {
+    width: 130px;
+    margin-bottom: 20px;
+  }
+  .left_txt_one {
+    color: #000;
+    font-size: 30px;
+    font-weight: 500;
+  }
+  .left_txt_two {
+    color: #636363;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 3;
+  }
+}
+.right_form {
+  margin-left: 20px;
+  width: 400px;
+  .login_form {
+    /deep/.el-input__inner {
+      height: 50px;
+      line-height: 50px;
+    }
+  }
+}
+.login_erm {
+  position: relative;
+  width: 205px;
+  height: 205px;
+  border-radius: 10px;
+  border: 1px solid #e2e2e2;
+  margin: 53px auto 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 180px;
+    height: 180px;
+  }
+  .login_ewm_expire {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    i {
+      font-size: 40px;
+      color: #3370ff;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+    p {
+      color: #3d3d3d;
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+.login_tit {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 2;
+  text-align: center;
+  margin: 50px 0 25px;
+}
+.code_btn {
+  background: transparent;
+  border: none;
+  color: #009cff;
+}
+.login_txt {
+  text-align: center;
+  margin: 10px 0 50px;
+  color: #999;
+  a {
+    color: #3971e8;
+  }
+}
+.login_mode {
+  background: #f3f3f3;
+  border-radius: 4px;
+  width: 197px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+}
 .get_code {
   position: relative;
 
@@ -385,7 +466,7 @@ export default {
     line-height: 32px;
   }
 }
-.login_btn{
+.login_btn {
   width: 100%;
   height: 50px;
   margin-top: 10px;
@@ -430,7 +511,7 @@ export default {
     float: left;
     margin-right: 20px;
   }
-  .search_top{
+  .search_top {
     width: 300px;
     line-height: 56px;
   }
@@ -445,7 +526,7 @@ export default {
       outline: none;
     }
 
-    .el-input{
+    .el-input {
       width: 300px;
     }
     .right-menu-item {
