@@ -128,7 +128,7 @@
       <div class="result_dialog">
         <i :class="[payResult == 'success'?'el-icon-success':'el-icon-error']"></i>
         <p class="result_txt">{{payResult == 'success'?'支付成功':'支付失败'}}</p>
-        <p class="result_watch">可以在账户内设置，<span class="a_primary">查看订单</span></p>
+        <p class="result_watch">可以在账户内设置，<span class="a_primary" @click="handleOrder">查看订单</span></p>
         <el-button type="primary" @click="payResult='fail'">确定</el-button>
       </div>
     </el-dialog>
@@ -255,6 +255,12 @@ export default {
     this.isActivated = true;
   },
   methods: {
+    handleOrder(){
+      this.$router.push({
+        path: "/account/index",
+        query: { tabActive: 'second'},
+      });
+    },
     handleResult(){
       this.dialogPayVisible = false;
       this.dialogResultVisible = true;
