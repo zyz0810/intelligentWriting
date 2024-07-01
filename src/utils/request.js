@@ -3,24 +3,13 @@ import Qs from 'qs'
 import { MessageBox, Message, Confirm } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
-let requestUrl ='http://60.204.236.36:9200/'//测试环境
-// let requestUrl ='http://123.60.145.79:9200/'//开发环境
-// let requestUrl ='http://116.63.110.19:9200/'
-// let requestUrl ='http://192.168.2.164:9200/' //舒逸
-// let requestUrl ='http://192.168.2.61:9200/' //益达环境
-// let requestUrl ='http://192.168.2.181:9200' //尚学文本地
-// let requestUrl ='http://192.168.2.62:9200/' //张文松环境
+let requestUrl =''//测试环境
 
 switch (process.env.VUE_APP_MODE) {
- // case 'development':
- //  requestUrl ='http://123.60.163.221:9200/'
  //  break;
   //开发环境
  case 'development':
   requestUrl='http://116.63.110.19:9200/'
-   // requestUrl ='http://192.168.2.164:9200/' //舒逸
-  // requestUrl ='http://192.168.2.181:9200' //尚学文本地
-  //  requestUrl ='http://192.168.124.219:9200/' //张文松环境
   break;
  case 'production':
  requestUrl ='https://omc.kyaoduo.com/'
@@ -32,16 +21,9 @@ switch (process.env.VUE_APP_MODE) {
  requestUrl ='http://test.omc.kyaoduo.com/'
  break;
  default:
-   // requestUrl ='http://123.60.145.79:9200/'//开发环境
-  requestUrl ='http://60.204.236.36:9200/'//测试环境
-   // requestUrl ='http://192.168.2.164:9200/' //舒逸
-  // requestUrl ='http://192.168.2.181:9200/' //尚学文本地
-  //  requestUrl ='http://116.63.110.19:9200/'
-  //  requestUrl ='http://192.168.2.61:9200/'  //益达环境
-  //  requestUrl ='http://192.168.2.62:9200/' //张文松环境
+  requestUrl =''//测试环境
   break;
 }
-// requestUrl='http://192.168.2.69:9200'
 export { requestUrl }
 // create an axios instance
 const service = axios.create({

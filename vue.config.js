@@ -38,9 +38,10 @@ module.exports = {
     },
     // before: require('./mock/mock-server.js'),
     proxy:{
-      '/api':{
-        target:'http://139.224.233.152:18000',
+      '/art/api':{
+        target:'http://art.yaozengzhang.com/',
         changeOrigin: true,
+        pathRewrite: { '^/art/api': '/art/api' }
       }
     }
     // proxy:"http://139.224.233.152:18000",

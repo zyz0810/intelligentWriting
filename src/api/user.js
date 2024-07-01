@@ -1,5 +1,11 @@
 import request from '@/utils/request'
 import Qs from 'qs'
+
+/**
+ * 
+ * @param {短信验证码登录} data 
+ * @returns 
+ */
 export function login(data) {
   return request({
     url: 'api-auth/oauth/platform/login',
@@ -7,6 +13,30 @@ export function login(data) {
     method: 'post',
     // data
     data: Qs.stringify(data)
+  })
+}
+
+/**
+ * 获取二维码
+ * @returns 
+ */
+export function getQRCode() {
+  return request({
+    url: '/art/api/getWxLoginQr',
+    method: 'get'
+  })
+}
+
+/**
+ * 
+ * @param {轮训查询登录信息} seceneId 
+ * @returns 
+ */
+export function checkLoginInfo(seceneId) {
+  return request({
+    url: '/art/api/checkWxScan',
+    method: 'get',
+    params: seceneId
   })
 }
 
@@ -21,12 +51,8 @@ export function logout(data) {
     data: Qs.stringify(data)
   })
 }
-// export function getInfo(account_id) {
-//   return request({
-//     url: `/api/account/${account_id}/permissions`,
-//     method: 'get'
-//   })
-// }
+
+
 export function getInfo() {
   return request({
     url:'api-user/users/current',
