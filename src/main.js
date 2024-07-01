@@ -48,7 +48,8 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'small' // set element-ui default size  medium / small / mini
 })
 
-
+import tinymce from 'tinymce';
+Vue.prototype.$tinymce = tinymce;
 // register global utility filters
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])

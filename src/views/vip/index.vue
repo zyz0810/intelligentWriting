@@ -31,7 +31,7 @@
         <div class="vip_middle">
           <p class="vip_middle_one"><span class="f12">￥</span>24</p>
           <s class="vip_middle_two clr_red01">原价48/月，限时5折优惠</s>
-          <el-button class="vip_middle_btn vip_middle_btn_two">立即升级</el-button>
+          <el-button class="vip_middle_btn vip_middle_btn_two" @click="handlePay">立即升级</el-button>
         </div>
         <div class="vip_bottom">
           <p><i class="el-icon-check clr_blue01"></i>AI智能写作</p>
@@ -53,7 +53,7 @@
         <div class="vip_middle">
           <p class="vip_middle_one"><span class="f12">￥</span>69</p>
           <s class="vip_middle_two clr_red01">原价96/年，限时5折优惠</s>
-          <el-button class="vip_middle_btn vip_middle_btn_three">立即升级</el-button>
+          <el-button class="vip_middle_btn vip_middle_btn_three" @click="handlePay">立即升级</el-button>
         </div>
         <div class="vip_bottom">
           <p><i class="el-icon-check clr_blue01"></i>AI智能写作</p>
@@ -75,7 +75,7 @@
         <div class="vip_middle">
           <p class="vip_middle_one"><span class="f12">￥</span>399</p>
           <s class="vip_middle_two clr_red01">原价599/月，最多20个账号</s>
-          <el-button class="vip_middle_btn vip_middle_btn_four">立即升级</el-button>
+          <el-button class="vip_middle_btn vip_middle_btn_four" @click="handlePay">立即升级</el-button>
         </div>
         <div class="vip_bottom">
           <p><i class="el-icon-check clr_blue01"></i>AI智能写作</p>
@@ -91,7 +91,47 @@
       </div>
     </div>
 
+<!--支付二维码弹窗-->
+    <el-dialog :visible.sync="dialogPayVisible"
+               :close-on-click-modal="true"
+               width="700px"
+               @close="close"
+               :append-to-body="true"
+               top="20vh"
+               class="dialogContainer no_header_dialog"
+               @open="open"
+               :show-close="false"
+               title="">
 
+      <div class="pay_dialog">
+        <div class="pay_dialog_left" @click="handleResult">
+          <img src="https://img1.baidu.com/it/u=3685234108,954911792&fm=253&fmt=auto&app=138&f=GIF?w=200&h=200"/>
+          <p>扫码支付</p>
+        </div>
+        <div class="pay_dialog_right">
+          <p class="pay_txt">应付金额</p>
+          <p class="pay_money"><span>￥</span>19.00</p>
+          <p>支付即视为您同意《 如此AI会员服务协议》和《如此AI个人/企业会员授权许可协议》 </p>
+        </div>
+      </div>
+    </el-dialog>
+<!--    支付结果-->
+    <el-dialog :visible.sync="dialogResultVisible"
+               :close-on-click-modal="true"
+               width="400px"
+               @close="close"
+               :append-to-body="true"
+               top="20vh"
+               class="dialogContainer no_header_dialog"
+               @open="open"
+               title="">
+      <div class="result_dialog">
+        <i :class="[payResult == 'success'?'el-icon-success':'el-icon-error']"></i>
+        <p class="result_txt">{{payResult == 'success'?'支付成功':'支付失败'}}</p>
+        <p class="result_watch">可以在账户内设置，<span class="a_primary">查看订单</span></p>
+        <el-button type="primary" @click="payResult='fail'">确定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -104,8 +144,9 @@ export default {
   name: "orderList",
   data () {
     return {
-
-
+      payResult:'success',
+      dialogResultVisible:false,
+      dialogPayVisible:false,
       templateSearch:'',
       dataList: [{
         id:1,
@@ -214,6 +255,14 @@ export default {
     this.isActivated = true;
   },
   methods: {
+    handleResult(){
+      this.dialogPayVisible = false;
+      this.dialogResultVisible = true;
+      this.payResult = 'success';
+    },
+    handlePay(){
+      this.dialogPayVisible = true;
+    },
     resetList () {
       Object.assign(this.listQuery, {
         page: 1,
@@ -355,6 +404,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .app-container {
   /*background: #fff;*/
   height: calc(100vh - 56px);

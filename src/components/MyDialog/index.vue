@@ -99,6 +99,9 @@ export default {
 
 <style lang="scss" scoped>
   @import "@/styles/variables.scss";
+  /deep/.el-dialog__header{
+    border-bottom: 1px solid #eeeff3;
+  }
 .iconfont {
   float: right;
   font-size: 20px;

@@ -10,7 +10,40 @@
 <!--    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />-->
     <el-input prefix-icon="el-icon-search" class="search_top" v-model="searchText" placeholder="搜索我的档名"></el-input>
     <div class="right-menu">
-      <el-button type="primary" @click="dialogFormVisible = true">登录/注册</el-button>
+      <el-button type="primary" @click="dialogFormVisible = true" v-show="!loginStatus">登录/注册</el-button>
+      <el-dropdown
+        class="avatar-container right-menu-item hover-effect" trigger="click" v-show="loginStatus">
+        <div class="avatar-wrapper">
+          <img :src="headImg" class="user-avatar" /><i class="el-icon-caret-bottom" />
+        </div>
+        <el-dropdown-menu slot="dropdown" class="top_account">
+          <div class="flex top_info">
+            <div class="flex_hd"> <img :src="headImg" class="user-avatar" /></div>
+            <div class="flex_bd">
+              <p>风清扬007</p>
+              <p>ID:332329</p>
+            </div>
+          </div>
+          <router-link to="/account/index">
+            <el-dropdown-item>账户设置</el-dropdown-item>
+          </router-link>
+          <router-link to="/account/index">
+            <el-dropdown-item>订单管理</el-dropdown-item>
+          </router-link>
+          <!--          <router-link to="/">-->
+          <!--            <el-dropdown-item>Dashboard</el-dropdown-item>-->
+          <!--          </router-link>-->
+          <!--          <a target="_blank" href="https://github.com/PanJiaChen/vue-element-admin/">-->
+          <!--            <el-dropdown-item>Github</el-dropdown-item>-->
+          <!--          </a>-->
+          <!--          <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">-->
+          <!--            <el-dropdown-item>Docs</el-dropdown-item>-->
+          <!--          </a>-->
+          <el-dropdown-item divided @click.native="logout">
+            <span style="display: block">退 出</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
     <el-dialog :title="textMap[dialogStatus]" width="900px" :close-on-click-modal="false" :visible.sync="dialogFormVisible" class="login_dialog" append-to-body>
       <i class="el-icon-circle-close login_close" @click="dialogFormVisible = false"></i>
@@ -88,6 +121,7 @@ import { getSmsCode } from "@/api/code";
 export default {
   data() {
     return {
+      loginStatus:false,
       expire:false,
       headImg: headImg,
       systemDate: "",
@@ -209,19 +243,21 @@ export default {
       });
     },
     updateData() {
-      this.$refs["dataForm"].validate((valid) => {
-        if (valid) {
-          updatePassword(this.passwordTemp).then((res) => {
-            if (res.resp_code == 0) {
-              this.dialogFormVisible = false;
-              this.$message({
-                message: "密码重置成功",
-                type: "success",
-              });
-            }
-          });
-        }
-      });
+      this.loginStatus = true;
+      this.dialogFormVisible = false;
+      // this.$refs["dataForm"].validate((valid) => {
+      //   if (valid) {
+      //     updatePassword(this.passwordTemp).then((res) => {
+      //       if (res.resp_code == 0) {
+      //         this.dialogFormVisible = false;
+      //         this.$message({
+      //           message: "密码重置成功",
+      //           type: "success",
+      //         });
+      //       }
+      //     });
+      //   }
+      // });
     },
     async logout() {
       await this.$store.dispatch("user/logout");
@@ -254,6 +290,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .top_account{
+    .top_info{
+      align-items: center;
+      padding: 15px;
+      img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+      p{
+        &:nth-child(1){
+          font-size: 14px;
+          color: #2B3F66;
+        }
+        &:nth-child(2){
+          font-size: 12px;
+          color: #AFB7C7;
+          margin-top: 6px;
+        }
+      }
+    }
+  }
   .login_dialog{
     /*position: relative;*/
     /deep/.el-dialog__header{

@@ -200,6 +200,55 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/account',
+    component: Layout,
+    // redirect: '/template/index',
+    hidden: true,
+    name: 'account',
+    meta: { title: 'account', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/account/index'),
+        name: 'vip',
+        meta: { title: '账户设置', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
+  {
+    path: '/editor/index1',
+    // component: Layout,
+    // redirect: '/template/index',
+    hidden: true,
+    component: () => import('@/views/editor/index'),
+    name: 'editor',
+    meta: { title: 'editor', icon: 'indexIcon', affix: true },
+    // children: [
+    //   {
+    //     path: 'index',
+    //     component: () => import('@/views/editor/index'),
+    //     name: 'editor',
+    //     meta: { title: 'editor', icon: 'indexIcon', affix: true }
+    //   }
+    // ]
+  },
+  {
+    path: '/editor',
+    component: Layout,
+    // redirect: '/template/index',
+    // hidden: true,
+    name: 'editor',
+    meta: { title: 'editor', icon: 'indexIcon', affix: true },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/editor/index'),
+        name: 'editor',
+        meta: { title: 'editor', icon: 'indexIcon', affix: true }
+      }
+    ]
+  },
 ]
 /**
  * asyncRoutes

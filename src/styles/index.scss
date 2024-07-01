@@ -554,9 +554,9 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.el-dialog__header{
-  background: #dbe3ef;
-}
+//.el-dialog__header{
+//  background: #dbe3ef;
+//}
 
 .el-upload-list__item {
   transition: none !important;
@@ -811,4 +811,76 @@ input[type="number"] {
 }
 .clr_red01{
   color: #FF4A4A;
+}
+.a_primary{
+  color: #3370FF;
+}
+.result_dialog{
+  text-align: center;
+  i{
+    font-size: 56px;
+    &.el-icon-success{
+      color: #54C151;
+    }
+    &.el-icon-error{
+      color: #FF7C02;
+    }
+  }
+  .result_txt{
+    color: #001949;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 2.5;
+  }
+  .result_watch{
+    color: #707E98;
+    font-size: 14px;
+    /*line-height: 2;*/
+    margin-bottom: 30px;
+  }
+}
+.no_header_dialog{
+  /deep/.el-dialog__header{
+    /*display: none !important;*/
+    padding: 0;
+  }
+  /deep/.el-dialog,/deep/.el-dialog__body{
+    border-radius: 12px;
+  }
+}
+.pay_dialog{
+  display: flex;
+  /*justify-content: flex-end;*/
+  align-items: end;
+  .pay_dialog_left{
+    width: 150px;
+    margin-right: 10px;
+    border: 1px solid #E8E8E9;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    img{
+      width: 120px;
+    }
+    p{
+      font-size: 14px;
+      color: #707E98;
+    }
+  }
+  .pay_dialog_right{
+    color: #3D3D3D;
+    font-size: 12px;
+    .pay_txt{
+      color: #999999;
+      font-size: 14px;
+    }
+    .pay_money{
+      color: #FE5900;
+      font-size: 22px;
+      line-height: 3;
+      span{
+        font-size: 12px;
+      }
+    }
+  }
 }
